@@ -1,2 +1,2 @@
 # autobus
-Java representation of event bus mechanism in simple use
+Simple java representation of event bus mechanism in simple use
