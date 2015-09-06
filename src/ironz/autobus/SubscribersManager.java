@@ -18,18 +18,14 @@ final class SubscribersManager {
         final Class<?> clazz = t.getClass();
 
         for (final Method method : clazz.getDeclaredMethods()) {
-            if(isSubscriber(method)) {
-                final Class<?> parameter = method.getParameterTypes()[0];
+            if(method.isAnnotationPresent(Subscribe.class)) {
                 method.setAccessible(true);
+                final Class<?> parameter = method.getParameterTypes()[0];
                 list.add(new Subscription(t, parameter, method));
             }
         }
 
         return list;
-    }
-
-    private boolean isSubscriber(final Method method) {
-        return method.isAnnotationPresent(Subscribe.class);
     }
 
     protected final <T> List<Subscription> getSubscriptionsByType(final T t, final List<Subscription> subscriptions) {
@@ -46,7 +42,7 @@ final class SubscribersManager {
 
     protected final <T> boolean post(final T t, final List<Subscription> subscriptions) {
         for (final Subscription subscription : subscriptions) {
-            if (subscription.getParameter().equals(t.getClass())) {
+            if (subscription.getParameter() == t.getClass()) {
                 try {
                     subscription.getMethod().invoke(subscription.getType(), t);
                 } catch (Exception e) {

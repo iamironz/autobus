@@ -19,7 +19,7 @@ public class LifecycleHandler {
     }
 
     @Subscribe
-    public void subscribeTest2(Long aLong) {
+    private void subscribeTest2(Long aLong) {
         System.out.println(aLong);
     }
 
