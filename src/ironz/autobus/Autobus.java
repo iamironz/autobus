@@ -31,16 +31,16 @@ public final class Autobus {
     }
 
     public final <T> void subscribe(final T t) {
-        final List<Subscription> subscriptions = manager.getSubscriptions(t);
-        final List<Subscription> subscriptionsWithKey = manager.getSubscriptionsWithKey(t);
-        this.subscriptions.addAll(subscriptions);
-        this.subscriptionsWithKey.addAll(subscriptionsWithKey);
+        final List<Subscription> subscriptionList = manager.getSubscriptions(t);
+        final List<Subscription> subscriptionsListWithKey = manager.getSubscriptionsWithKey(t);
+        subscriptions.addAll(subscriptionList);
+        subscriptionsWithKey.addAll(subscriptionsListWithKey);
     }
 
     public final <T> void unsubscribe(final T t) {
-        List<Subscription> subscriptionList = manager.getSubscriptionsFromObject(t, subscriptions);
+        final List<Subscription> subscriptionList = manager.getSubscriptionsFromObject(t, subscriptions);
+        final List<Subscription> subscriptionsListWithKey = manager.getSubscriptionsFromObject(t, subscriptionsWithKey);
         subscriptions.removeAll(subscriptionList);
-        List<Subscription> subscriptionsListWithKey = manager.getSubscriptionsFromObject(t, subscriptionsWithKey);
         subscriptionsWithKey.removeAll(subscriptionsListWithKey);
     }
 
