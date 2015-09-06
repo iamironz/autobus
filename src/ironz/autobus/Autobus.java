@@ -15,6 +15,7 @@ public final class Autobus {
 
     private final SubscribersManager manager = new SubscribersManager();
     private final List<Subscription> subscriptions = new ArrayList<>();
+    private final List<Subscription> subscriptionsWithKey = new ArrayList<>();
 
     private Autobus() {}
 
@@ -30,16 +31,24 @@ public final class Autobus {
     }
 
     public final <T> void subscribe(final T t) {
-        final List<Subscription> list = manager.getSubscriptions(t);
-        subscriptions.addAll(list);
+        final List<Subscription> subscriptions = manager.getSubscriptions(t);
+        final List<Subscription> subscriptionsWithKey = manager.getSubscriptionsWithKey(t);
+        this.subscriptions.addAll(subscriptions);
+        this.subscriptionsWithKey.addAll(subscriptionsWithKey);
     }
 
     public final <T> void unsubscribe(final T t) {
-        final List<Subscription> list = manager.getSubscriptionsByType(t, subscriptions);
-        subscriptions.removeAll(list);
+        List<Subscription> subscriptionList = manager.getSubscriptionsFromObject(t, subscriptions);
+        subscriptions.removeAll(subscriptionList);
+        List<Subscription> subscriptionsListWithKey = manager.getSubscriptionsFromObject(t, subscriptionsWithKey);
+        subscriptionsWithKey.removeAll(subscriptionsListWithKey);
     }
 
     public final <T> boolean post(final T t) {
         return manager.post(t, subscriptions);
+    }
+
+    public final <T> boolean post(final String key, final T t) {
+        return manager.post(key, t, subscriptionsWithKey);
     }
 }

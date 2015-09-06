@@ -9,6 +9,9 @@ import ironz.autobus.Subscribe;
  */
 public class LifecycleHandler {
 
+    public static final String FIRST_KEY = "first_key";
+    public static final String SECOND_KEY = "second_key";
+
     public void init() {
         Autobus.get().subscribe(this);
     }
@@ -20,6 +23,16 @@ public class LifecycleHandler {
 
     @Subscribe
     private void subscribeTest2(Long aLong) {
+        System.out.println(aLong);
+    }
+
+    @Subscribe(key = FIRST_KEY)
+    private void subscribeTest3(String someString) {
+        System.out.println(someString);
+    }
+
+    @Subscribe(key = SECOND_KEY)
+    private void subscribeTest4(Long aLong) {
         System.out.println(aLong);
     }
 

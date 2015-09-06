@@ -18,17 +18,33 @@ final class SubscribersManager {
         final Class<?> clazz = t.getClass();
 
         for (final Method method : clazz.getDeclaredMethods()) {
-            if(method.isAnnotationPresent(Subscribe.class)) {
+            if(method.isAnnotationPresent(Subscribe.class) && method.getAnnotation(Subscribe.class).key().isEmpty()) {
                 method.setAccessible(true);
                 final Class<?> parameter = method.getParameterTypes()[0];
-                list.add(new Subscription(t, parameter, method));
+                list.add(new Subscription(t, parameter, method, method.getAnnotation(Subscribe.class).key()));
             }
         }
 
         return list;
     }
 
-    protected final <T> List<Subscription> getSubscriptionsByType(final T t, final List<Subscription> subscriptions) {
+    @SuppressWarnings("unchecked")
+    protected final <T> List<Subscription> getSubscriptionsWithKey(final T t) {
+        final List<Subscription> list = new ArrayList<>();
+        final Class<?> clazz = t.getClass();
+
+        for (final Method method : clazz.getDeclaredMethods()) {
+            if(method.isAnnotationPresent(Subscribe.class) && !method.getAnnotation(Subscribe.class).key().isEmpty()) {
+                method.setAccessible(true);
+                final Class<?> parameter = method.getParameterTypes()[0];
+                list.add(new Subscription(t, parameter, method, method.getAnnotation(Subscribe.class).key()));
+            }
+        }
+
+        return list;
+    }
+
+    protected final <T> List<Subscription> getSubscriptionsFromObject(final T t, final List<Subscription> subscriptions) {
         final List<Subscription> list = new ArrayList<>();
 
         for (final Subscription subscription : subscriptions) {
@@ -43,6 +59,20 @@ final class SubscribersManager {
     protected final <T> boolean post(final T t, final List<Subscription> subscriptions) {
         for (final Subscription subscription : subscriptions) {
             if (subscription.getParameter() == t.getClass()) {
+                try {
+                    subscription.getMethod().invoke(subscription.getType(), t);
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public <T> boolean post(final String key, final T t, final List<Subscription> subscriptions) {
+        for (final Subscription subscription : subscriptions) {
+            if (subscription.getParameter() == t.getClass() && subscription.getKey().equals(key)) {
                 try {
                     subscription.getMethod().invoke(subscription.getType(), t);
                 } catch (Exception e) {

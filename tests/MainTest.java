@@ -19,6 +19,8 @@ public class MainTest {
 
         Autobus.get().post(new StubObject(0, "title"));
         Autobus.get().post(256L);
+        Autobus.get().post(LifecycleHandler.FIRST_KEY, "Some value with key");
+        Autobus.get().post(LifecycleHandler.SECOND_KEY, 0L);
 
         handler.destroy();
         handler1.destroy();
