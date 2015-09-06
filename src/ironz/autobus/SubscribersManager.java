@@ -20,23 +20,12 @@ final class SubscribersManager {
         for (final Method method : clazz.getDeclaredMethods()) {
             if(isSubscriber(method)) {
                 final Class<?> parameter = method.getParameterTypes()[0];
-                if (isEventInterfaceInstance(parameter)) {
-                    method.setAccessible(true);
-                    list.add(new Subscription(t, parameter, method));
-                }
+                method.setAccessible(true);
+                list.add(new Subscription(t, parameter, method));
             }
         }
 
         return list;
-    }
-
-    private boolean isEventInterfaceInstance(Class<?> parameter) {
-        for (final Class<?> interfacePresent : parameter.getInterfaces()) {
-            if(interfacePresent.isAssignableFrom(AutobusEvent.class)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private boolean isSubscriber(final Method method) {

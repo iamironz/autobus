@@ -11,18 +11,17 @@ public class MainTest {
 
     @Test
     public void testBaseSending() {
-        AutobusMockClass mockClass = new AutobusMockClass();
-        AutobusMockClass mockClass2 = new AutobusMockClass();
+        LifecycleHandler handler = new LifecycleHandler();
+        LifecycleHandler handler1 = new LifecycleHandler();
 
-        mockClass.init();
-        mockClass2.init();
+        handler.init();
+        handler1.init();
 
-        long start = System.currentTimeMillis();
-        Autobus.get().post(new StubObject());
-        System.out.println("taken: " + (System.currentTimeMillis() - start));
+        Autobus.get().post(new StubObject(0, "title"));
+        Autobus.get().post(256L);
 
-        mockClass.destroy();
-        mockClass2.destroy();
+        handler.destroy();
+        handler1.destroy();
     }
 
 }
