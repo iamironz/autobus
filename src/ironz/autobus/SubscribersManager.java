@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Ironz.
  * In Intellij IDEA 14 Ultimate.
  * Date: 04.09.2015, 17:10
- * aefremenkov@livemaster.ru
+ * implimentz@gmail.com
  */
 final class SubscribersManager {
 

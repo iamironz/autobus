@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Ironz.
  * In Intellij IDEA 14 Ultimate.
  * Date: 04.09.2015, 16:43
- * aefremenkov@livemaster.ru
+ * implimentz@gmail.com
  */
 public final class Autobus {
 

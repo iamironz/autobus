@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
  * Created by Ironz.
  * In Intellij IDEA 14 Ultimate.
  * Date: 04.09.2015, 17:25
- * aefremenkov@livemaster.ru
+ * implimentz@gmail.com
  */
 final class Subscription<T> {
 

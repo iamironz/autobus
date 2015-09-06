@@ -10,7 +10,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Created by Ironz.
  * In Intellij IDEA 14 Ultimate.
  * Date: 04.09.2015, 16:44
- * aefremenkov@livemaster.ru
+ * implimentz@gmail.com
  */
 @Target(METHOD)
 @Retention(RUNTIME)
