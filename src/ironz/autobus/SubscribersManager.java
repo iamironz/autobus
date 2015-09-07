@@ -15,9 +15,8 @@ final class SubscribersManager {
     @SuppressWarnings("unchecked")
     protected final <T> List<Subscription> getSubscriptions(final T t) {
         final List<Subscription> list = new ArrayList<>();
-        final Class<?> clazz = t.getClass();
 
-        for (final Method method : clazz.getDeclaredMethods()) {
+        for (final Method method : t.getClass().getDeclaredMethods()) {
             if(method.isAnnotationPresent(Subscribe.class) && method.getAnnotation(Subscribe.class).key().isEmpty()) {
                 method.setAccessible(true);
                 final Class<?> parameter = method.getParameterTypes()[0];
@@ -31,9 +30,8 @@ final class SubscribersManager {
     @SuppressWarnings("unchecked")
     protected final <T> List<Subscription> getSubscriptionsWithKey(final T t) {
         final List<Subscription> list = new ArrayList<>();
-        final Class<?> clazz = t.getClass();
 
-        for (final Method method : clazz.getDeclaredMethods()) {
+        for (final Method method : t.getClass().getDeclaredMethods()) {
             if(method.isAnnotationPresent(Subscribe.class) && !method.getAnnotation(Subscribe.class).key().isEmpty()) {
                 method.setAccessible(true);
                 final Class<?> parameter = method.getParameterTypes()[0];
@@ -44,7 +42,7 @@ final class SubscribersManager {
         return list;
     }
 
-    protected final <T> List<Subscription> getSubscriptionsFromObject(final T t, final List<Subscription> subscriptions) {
+    protected final <T> List<Subscription> getSubscriptionsByObject(final T t, final List<Subscription> subscriptions) {
         final List<Subscription> list = new ArrayList<>();
 
         for (final Subscription subscription : subscriptions) {
@@ -70,7 +68,7 @@ final class SubscribersManager {
         return true;
     }
 
-    protected <T> boolean post(final String key, final T t, final List<Subscription> subscriptions) {
+    protected final <T> boolean post(final String key, final T t, final List<Subscription> subscriptions) {
         for (final Subscription subscription : subscriptions) {
             if (subscription.getParameter() == t.getClass() && subscription.getKey().equals(key)) {
                 try {

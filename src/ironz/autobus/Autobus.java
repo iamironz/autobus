@@ -23,8 +23,8 @@ public final class Autobus {
     }
 
     public final <T> void unsubscribe(final T t) {
-        final List<Subscription> subscriptionList = manager.getSubscriptionsFromObject(t, subscriptions);
-        final List<Subscription> subscriptionsListWithKey = manager.getSubscriptionsFromObject(t, subscriptionsWithKey);
+        final List<Subscription> subscriptionList = manager.getSubscriptionsByObject(t, subscriptions);
+        final List<Subscription> subscriptionsListWithKey = manager.getSubscriptionsByObject(t, subscriptionsWithKey);
         subscriptions.removeAll(subscriptionList);
         subscriptionsWithKey.removeAll(subscriptionsListWithKey);
     }
