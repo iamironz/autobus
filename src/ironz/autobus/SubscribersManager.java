@@ -70,7 +70,7 @@ final class SubscribersManager {
         return true;
     }
 
-    public <T> boolean post(final String key, final T t, final List<Subscription> subscriptions) {
+    protected <T> boolean post(final String key, final T t, final List<Subscription> subscriptions) {
         for (final Subscription subscription : subscriptions) {
             if (subscription.getParameter() == t.getClass() && subscription.getKey().equals(key)) {
                 try {
