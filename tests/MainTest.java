@@ -9,21 +9,25 @@ import org.junit.Test;
  */
 public class MainTest {
 
+    private final Autobus autobus = AutoBusHelper.getAutobus();
+
     @Test
     public void testBaseSending() {
-        LifecycleHandler handler = new LifecycleHandler();
-        LifecycleHandler handler1 = new LifecycleHandler();
+        final LifecycleHandler handler = new LifecycleHandler();
+        final LifecycleHandler handler1 = new LifecycleHandler();
 
         handler.init();
         handler1.init();
 
-        Autobus.get().post(new StubObject(0, "title"));
-        Autobus.get().post(256L);
-        Autobus.get().post(LifecycleHandler.FIRST_KEY, "Some value with key");
-        Autobus.get().post(LifecycleHandler.SECOND_KEY, 0L);
+        autobus.post(new StubObject(0, "title"));
+        autobus.post(256L);
+        autobus.post(LifecycleHandler.FIRST_KEY, new StubObject(1, "title 2"));
+        autobus.post(LifecycleHandler.SECOND_KEY, 0L);
 
         handler.destroy();
         handler1.destroy();
     }
+
+
 
 }

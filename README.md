@@ -4,10 +4,25 @@ Simple java representation of event bus mechanism
 Using:
 --------
 
+**Create fabric for getting one instance of Autobus:**
+
+    public class AutoBusHelper {
+    
+        private static final Autobus autobus;
+        
+        static {
+            autobus = new Autobus();
+        }
+        
+        public static Autobus getAutobus() {
+            return autobus;
+        }
+    }
+
 **To subscribe class for events:**
 
     public void init() {
-        Autobus.get().subscribe(this);
+        AutoBusHelper.getAutobus().subscribe(this);
     }
     
 
@@ -21,13 +36,13 @@ Using:
 
 **To send event for all subscribers:**
 
-    Autobus.get().post("Hello, autobus!");
+    AutoBusHelper.getAutobus().post("Hello, autobus!");
     
 
 **To remove subscribers from broadcasting:**
 
     public void destroy() {
-        Autobus.get().unsubscribe(this);
+        AutoBusHelper.getAutobus().unsubscribe(this);
     }
     
 License

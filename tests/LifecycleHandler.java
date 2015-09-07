@@ -11,14 +11,15 @@ public class LifecycleHandler {
 
     public static final String FIRST_KEY = "first_key";
     public static final String SECOND_KEY = "second_key";
+    private Autobus autobus = AutoBusHelper.getAutobus();
 
     public void init() {
-        Autobus.get().subscribe(this);
+        autobus.subscribe(this);
     }
 
     @Subscribe
-    public void subscribeTest(StubObject stubObject) {
-        System.out.println(stubObject);
+    public void subscribeTest(StubObject object) {
+        System.out.println(object);
     }
 
     @Subscribe
@@ -27,8 +28,8 @@ public class LifecycleHandler {
     }
 
     @Subscribe(key = FIRST_KEY)
-    private void subscribeTest3(String someString) {
-        System.out.println(someString);
+    private void subscribeTest3(StubObject object) {
+        System.out.println(object);
     }
 
     @Subscribe(key = SECOND_KEY)
@@ -37,6 +38,6 @@ public class LifecycleHandler {
     }
 
     public void destroy() {
-        Autobus.get().unsubscribe(this);
+        autobus.unsubscribe(this);
     }
 }

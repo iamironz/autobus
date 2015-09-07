@@ -11,24 +11,9 @@ import java.util.List;
  */
 public final class Autobus {
 
-    private static volatile Autobus autobus;
-
     private final SubscribersManager manager = new SubscribersManager();
     private final List<Subscription> subscriptions = new ArrayList<>();
     private final List<Subscription> subscriptionsWithKey = new ArrayList<>();
-
-    private Autobus() {}
-
-    public static Autobus get() {
-        if (autobus == null) {
-            synchronized (Autobus.class) {
-                if (autobus == null) {
-                    autobus = new Autobus();
-                }
-            }
-        }
-        return autobus;
-    }
 
     public final <T> void subscribe(final T t) {
         final List<Subscription> subscriptionList = manager.getSubscriptions(t);
