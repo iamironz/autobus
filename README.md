@@ -6,7 +6,7 @@ Using:
 
 **Create fabric for getting one instance of Autobus:**
 
-    public class AutoBusHelper {
+    public class AutobusHelper {
     
         private static final Autobus autobus;
         
