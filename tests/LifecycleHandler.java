@@ -1,6 +1,8 @@
 import ironz.autobus.Autobus;
 import ironz.autobus.Subscribe;
 
+import java.util.List;
+
 /**
  * Created by Ironz.
  * In Intellij IDEA 14 Ultimate.
@@ -28,7 +30,7 @@ public class LifecycleHandler {
     }
 
     @Subscribe(key = FIRST_KEY)
-    private void subscribeTest3(StubObject object) {
+    private void subscribeTest3(List<String> object) {
         System.out.println(object);
     }
 
