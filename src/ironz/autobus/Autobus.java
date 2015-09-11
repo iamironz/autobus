@@ -11,29 +11,40 @@ import java.util.List;
  */
 public final class Autobus {
 
-    private final SubscribersManager manager = new SubscribersManager();
+    private final SubscribersFetcher fetcher = new SubscribersFetcher();
+    private final SubscribersExecutor executor = new SubscribersExecutor();
+
     private final List<Subscription> subscriptions = new ArrayList<>();
     private final List<Subscription> subscriptionsWithKey = new ArrayList<>();
+    private final List<Subscription> subscriptionsWithoutValue = new ArrayList<>();
 
     public final <T> void subscribe(final T t) {
-        final List<Subscription> subscriptionList = manager.getSubscriptions(t);
-        final List<Subscription> subscriptionsListWithKey = manager.getSubscriptionsWithKey(t);
+        final List<Subscription> subscriptionList = fetcher.getSubscriptions(t);
+        final List<Subscription> subscriptionsListWithKey = fetcher.getSubscriptionsWithKey(t);
+        final List<Subscription> subscriptionsListWithoutValue = fetcher.getSubscriptionsListWithoutValue(t);
         subscriptions.addAll(subscriptionList);
         subscriptionsWithKey.addAll(subscriptionsListWithKey);
+        subscriptionsWithoutValue.addAll(subscriptionsListWithoutValue);
     }
 
     public final <T> void unsubscribe(final T t) {
-        final List<Subscription> subscriptionList = manager.getSubscriptionsByObject(t, subscriptions);
-        final List<Subscription> subscriptionsListWithKey = manager.getSubscriptionsByObject(t, subscriptionsWithKey);
+        final List<Subscription> subscriptionList = fetcher.getSubscriptionsByObject(t, subscriptions);
+        final List<Subscription> subscriptionsListWithKey = fetcher.getSubscriptionsByObject(t, subscriptionsWithKey);
+        final List<Subscription> subscriptionsListWithoutValue = fetcher.getSubscriptionsWithoutValue(t, subscriptionsWithoutValue);
         subscriptions.removeAll(subscriptionList);
         subscriptionsWithKey.removeAll(subscriptionsListWithKey);
+        subscriptionsWithoutValue.removeAll(subscriptionsListWithoutValue);
     }
 
     public final <T> boolean post(final T t) {
-        return manager.post(t, subscriptions);
+        return executor.post(t, subscriptions);
     }
 
     public final <T> boolean post(final String key, final T t) {
-        return manager.post(key, t, subscriptionsWithKey);
+        return executor.post(key, t, subscriptionsWithKey);
+    }
+
+    public final boolean post(final String key) {
+        return executor.post(key, subscriptionsWithoutValue);
     }
 }
