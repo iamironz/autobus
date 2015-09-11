@@ -36,6 +36,7 @@ public class MainTest {
     public void testSendingByKey() {
         autobus.post(LifecycleHandler.FIRST_KEY, Arrays.asList("One", "Two"));
         autobus.post(LifecycleHandler.SECOND_KEY, 0L);
+        autobus.post(LifecycleHandler.SECOND_KEY);
 
         handler.destroy();
         handler1.destroy();

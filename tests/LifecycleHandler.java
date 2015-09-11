@@ -39,6 +39,11 @@ public class LifecycleHandler {
         System.out.println(aLong);
     }
 
+    @Subscribe(key = SECOND_KEY)
+    private void subscribeTest4() {
+        System.out.println("calling without signature");
+    }
+
     public void destroy() {
         autobus.unsubscribe(this);
     }
