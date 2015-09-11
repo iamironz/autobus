@@ -18,6 +18,7 @@ Using:
             return autobus;
         }
     }
+    
 
 **To subscribe class for events:**
 
@@ -31,9 +32,23 @@ Using:
     @Subscribe
     public void subscribeMethod(String string) {
         //do something with sent object
-    }
+    }    
     
+Or:
+    
+    @Subscribe(key = SOME_KEY_CONSTANT)
+    private void subscribeMethod() {
+        //do something with sent object
+    } 
+       
+Or:
+    
+    @Subscribe(key = SOME_KEY_CONSTANT)
+    private void subscribeMethod(String string) {
+        //do something with sent object
+    }
 
+    
 **To send event for all subscribers:**
 
     AutoBusHelper.getAutobus().post("Hello, autobus!");
@@ -44,6 +59,7 @@ Using:
     public void destroy() {
         AutoBusHelper.getAutobus().unsubscribe(this);
     }
+    
     
 License
 -------
