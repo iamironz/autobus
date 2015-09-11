@@ -45,7 +45,7 @@ final class SubscribersFetcher {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> List<Subscription> getSubscriptionsListWithoutValue(final T t) {
+    protected <T> List<Subscription> getSubscriptionsListWithoutValue(final T t) {
         final List<Subscription> list = new ArrayList<>();
 
         for (final Method method : t.getClass().getDeclaredMethods()) {
@@ -71,7 +71,7 @@ final class SubscribersFetcher {
         return list;
     }
 
-    public <T> List<Subscription> getSubscriptionsWithoutValue(final T t, final List<Subscription> subscriptions) {
+    protected <T> List<Subscription> getSubscriptionsWithoutValue(final T t, final List<Subscription> subscriptions) {
         final List<Subscription> list = new ArrayList<>();
 
         for (final Subscription subscription : subscriptions) {
