@@ -10,9 +10,9 @@ import java.util.List;
  */
 class SubscribersExecutor {
 
-    protected final boolean post(final String s, final List<Subscription> subscriptions) {
+    protected final boolean post(final String key, final List<Subscription> subscriptions) {
         for (final Subscription subscription : subscriptions) {
-            if (subscription.getKey().equals(s)) {
+            if (subscription.getKey().equals(key)) {
                 try {
                     subscription.getMethod().invoke(subscription.getType());
                 } catch (Exception e) {
