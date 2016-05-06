@@ -1,7 +1,7 @@
 # Autobus
 Simple java representation of event bus mechanism
 
-Using:
+Using (not actual):
 --------
 
 **Create fabric for getting one instance of Autobus:**
