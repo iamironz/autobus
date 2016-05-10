@@ -33,7 +33,7 @@ public final class AutobusClassGenerator {
     public static final String EVENT = "event";
 
     private FileWriter writer;
-    private boolean closed = false;
+    private volatile boolean closed = false;
 
     public final void initSource(final Filer filer) throws Exception {
         final JavaFileObject sourceFile = filer.createSourceFile(FACTORY_CLASS_NAME);
