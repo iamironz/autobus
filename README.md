@@ -33,20 +33,6 @@ Using (not actual):
     public void subscribeMethod(String string) {
         //do something with sent object
     }    
-    
-Or:
-    
-    @Subscribe(key = SOME_KEY_CONSTANT)
-    private void subscribeMethod() {
-        //do something with sent object
-    } 
-       
-Or:
-    
-    @Subscribe(key = SOME_KEY_CONSTANT)
-    private void subscribeMethod(String string) {
-        //do something with sent object
-    }
 
     
 **To send event for all subscribers:**
