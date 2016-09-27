@@ -26,7 +26,7 @@ After this step you should make your project. After making you'll be available `
 **Create fabric for getting one instance of Autobus:**
 
 ```java
-public class AutobusHelper {
+public class AutobusFactory {
     
     private static final Autobus autobus;
         
@@ -45,7 +45,7 @@ public class AutobusHelper {
 ```java
 public class Subscriber {
     public void init() {
-        AutoBusHelper.getAutobus().subscribe(this);
+        AutobusFactory.getAutobus().subscribe(this);
     }
 }
 ```
@@ -55,7 +55,7 @@ public class Subscriber {
 ```java
 public class Sender {
     public void sendSuccess() {
-        AutoBusHelper.getAutobus().post(new LoginMeta());   
+        AutobusFactory.getAutobus().post(new LoginMeta());   
     }
 }
 ```
@@ -65,7 +65,7 @@ public class Sender {
 ```java
 public class Subscriber {
     public void destroy() {
-        AutoBusHelper.getAutobus().unsubscribe(this);
+        AutobusFactory.getAutobus().unsubscribe(this);
     }
 }
 ```
