@@ -1,8 +1,26 @@
 # Autobus
 Simple java representation of event bus mechanism
 
+
+Adding:
+------------------
+For using in your own projects just add jcenter repository superset:
+
+```java
+repositories {
+    jcenter()
+}
+```
+
+And after you should just add this dependencies:
+
+```java
+apt 'com.implimentz:autobus-compiler:0.0.5'
+compile 'com.implimentz:autobus:0.0.5'
+```
+
 Using:
---------
+------------------
 
 
 **Getting started:**
