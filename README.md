@@ -10,18 +10,18 @@ Using:
 First of all you must to determine what method should be event-based, you can make this by code snippet below:
 
 ```java
-public class Test {
-
-
+public class Subscriber {
     @Subscribe
     public void onLoginSuccessEvent(LoginMeta meta) {
-
+        //some logic here
     }
-
 }
 ```
     
-After this step you should make your project. After making you'll be available `Autobus` class with strongly-typed methods `subscribe(Test)`, `unsubscribe(Test)` and `post(LoginMeta)` for `Test.java` only for this class. Methods for another classes and subscription methods will be generated and available after setting `@Subscribe` annotation and making project again.
+After this step you should make your project. After making you'll be available `Autobus` class with strongly-typed methods
+ `subscribe(Subscriber)`, `unsubscribe(Subscriber)` and `post(LoginMeta)` for `Subscriber.java` only for this class. 
+ Methods for another classes and subscription methods will be generated and available after setting `@Subscribe` 
+ annotation and making project again.
 
 **Create fabric for getting one instance of Autobus:**
 
@@ -43,22 +43,30 @@ public class AutobusHelper {
 **To subscribe class for events:**
 
 ```java
-public void init() {
-    AutoBusHelper.getAutobus().subscribe(this);
+public class Subscriber {
+    public void init() {
+        AutoBusHelper.getAutobus().subscribe(this);
+    }
 }
 ```
 
 **To send event for all subscribers:**
 
 ```java
-AutoBusHelper.getAutobus().post("Hello, autobus!");   
+public class Sender {
+    public void sendSuccess() {
+        AutoBusHelper.getAutobus().post(new LoginMeta());   
+    }
+}
 ```
 
 **To remove subscribers from broadcasting:**
 
 ```java
-public void destroy() {
-    AutoBusHelper.getAutobus().unsubscribe(this);
+public class Subscriber {
+    public void destroy() {
+        AutoBusHelper.getAutobus().unsubscribe(this);
+    }
 }
 ```
     
