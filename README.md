@@ -1,8 +1,27 @@
 # Autobus
 Simple java representation of event bus mechanism
 
-Using (not actual):
+Using:
 --------
+
+
+**Getting started:**
+
+First of all you must to determine what method should be event-based, you can make this by code snippet below:
+
+```java
+public class Test {
+
+
+    @Subscribe
+    public void onLoginSuccessEvent(LoginMeta meta) {
+
+    }
+
+}
+```
+    
+After this step you should make your project. After making you'll be available `Autobus` class with strongly-typed methods `subscribe(Test)`, `unsubscribe(Test)` and `post(LoginMeta)` for `Test.java` only for this class. Methods for another classes and subscription methods will be generated and available after setting `@Subscribe` annotation and making project again.
 
 **Create fabric for getting one instance of Autobus:**
 
@@ -18,7 +37,6 @@ Using (not actual):
             return autobus;
         }
     }
-    
 
 **To subscribe class for events:**
 
@@ -27,14 +45,6 @@ Using (not actual):
     }
     
 
-**To create subscribers:**
-
-    @Subscribe
-    public void subscribeMethod(String string) {
-        //do something with sent object
-    }    
-
-    
 **To send event for all subscribers:**
 
     AutoBusHelper.getAutobus().post("Hello, autobus!");
