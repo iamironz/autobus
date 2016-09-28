@@ -1,5 +1,6 @@
 # Autobus
-Simple java representation of event bus mechanism
+Simple java representation of event bus mechanism based on annotation processing.
+This approach not increase dex count and not needed to use a lot of bloat library code.
 
 
 Adding:
