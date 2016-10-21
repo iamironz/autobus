@@ -37,34 +37,15 @@ public class Subscriber {
 }
 ```
     
-After this step you should make your project. After making you'll be available `Autobus` class with strongly-typed methods
- `subscribe(Subscriber)`, `unsubscribe(Subscriber)` and `post(LoginMeta)` for `Subscriber.java` only for this class. 
- Methods for another classes and subscription methods will be generated and available after setting `@Subscribe` 
- annotation and making project again.
+After this step you should make your project. After making you'll be available `Autobus` class with strongly-typed static methods `subscribe(Subscriber)`, `unsubscribe(Subscriber)` and `post(LoginMeta)` for `Subscriber.java` only for this class. Methods for another classes and subscription methods will be generated and available after setting `@Subscribe` annotation and making project again.
 
-**Create fabric for getting one instance of Autobus:**
-
-```java
-public class AutobusFactory {
-    
-    private static final Autobus autobus;
-        
-    static {
-        autobus = new Autobus();
-    }
-        
-    public static Autobus getAutobus() {
-        return autobus;
-    }
-}
-```
 
 **To subscribe class for events:**
 
 ```java
 public class Subscriber {
     public void init() {
-        AutobusFactory.getAutobus().subscribe(this);
+        Autobus.subscribe(this);
     }
 }
 ```
@@ -74,7 +55,7 @@ public class Subscriber {
 ```java
 public class Sender {
     public void sendSuccess() {
-        AutobusFactory.getAutobus().post(new LoginMeta());   
+        Autobus.post(new LoginMeta());   
     }
 }
 ```
@@ -84,7 +65,7 @@ public class Sender {
 ```java
 public class Subscriber {
     public void destroy() {
-        AutobusFactory.getAutobus().unsubscribe(this);
+        Autobus.unsubscribe(this);
     }
 }
 ```
