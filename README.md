@@ -31,11 +31,12 @@ First of all you must to determine what method should be event-based, you can ma
 ```java
 public class Subscriber {
     @Subscribe
-    public void onLoginSuccessEvent(LoginMeta meta) {
+    public final void onLoginSuccessEvent(LoginMetaEvent event) {
         //some logic here
     }
 }
 ```
+Please note that method must be only `public`, `final` and should no return any value (must be `void`). Also number of arguments must be as 1 and argument class type should be named by \*Event suffix pattern.
     
 After this step you should make your project. After making you'll be available `Autobus` class with strongly-typed static methods `subscribe(Subscriber)`, `unsubscribe(Subscriber)` and `post(LoginMeta)` for `Subscriber.java` class only. Methods for another classes and subscription methods will be generated and available after setting `@Subscribe` annotation and making project again.
 
