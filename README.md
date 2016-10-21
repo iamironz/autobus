@@ -36,7 +36,7 @@ public class Subscriber {
     }
 }
 ```
-Please note that method must be only `public`, `final` and should no return any value (must be `void`). Also number of arguments must be as 1 and argument class type should be named by \*Event suffix pattern.
+Please note that method must be only `public`, `final` and should no return any value (must be `void`). Also number of arguments must be as 1 and argument class type should be named by "\*Event" suffix pattern (e.g. `LoginMetaEvent`).
     
 After this step you should make your project. After making you'll be available `Autobus` class with strongly-typed static methods `subscribe(Subscriber)`, `unsubscribe(Subscriber)` and `post(LoginMeta)` for `Subscriber.java` class only. Methods for another classes and subscription methods will be generated and available after setting `@Subscribe` annotation and making project again.
 
