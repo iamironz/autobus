@@ -1,6 +1,7 @@
 # Autobus
 Simple java and android representation of event bus mechanism based on annotation processing.
-This approach not increase android dex count and not needed to use a lot of bloat library code.
+This approach not increase android dex count because not have common code, all code is generated 
+and uses only standerd java library.
 
 
 Adding:
