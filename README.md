@@ -1,5 +1,5 @@
 # Autobus
-Simple java and android representation of event bus mechanism based on annotation processing.
+Simple java representation of stong typed annotation processed event bus mechanism.
 This approach not increase android dex count because not have common code, all code is generated 
 and uses only standerd java library. This is experimantal concept, please, use with caution!
 
